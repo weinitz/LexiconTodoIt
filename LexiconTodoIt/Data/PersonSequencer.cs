@@ -8,7 +8,7 @@ namespace LexiconTodoIt.Data
     {
         private static int personId;
 
-        public static int NextPersonId()
+        public static int nextPersonId()
         {
             return ++personId;
         }

@@ -9,7 +9,7 @@ namespace LexiconTodoItTests
         public void NextPersonIdTest()
         {
             var expected = 1;
-            var actual = PersonSequencer.NextPersonId();
+            var actual = PersonSequencer.nextPersonId();
 
             Assert.Equal(expected, actual);
         }
