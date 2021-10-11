@@ -34,6 +34,32 @@ namespace LexiconTodoIt.Data
             return todo;
         }
 
+        public Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            var result = todos.Where(todo => todo.Done);
+            return result.ToArray();
+        }
+
+        public Todo[] FindByAssignee(Person assignee)
+        {
+            var result = todos.Where(todo => todo.Assignee.PersonId == assignee.PersonId);
+            return result.ToArray();
+        }
+        
+        public Todo[] FindUnassignedTodoItems()
+        {
+            var result = todos.Where(todo => todo.Assignee == null);
+            return result.ToArray();
+        }
+        
+        public Todo[] FindByAssignee(int personId)
+        {
+            var result = todos.Where(todo => todo.Assignee.PersonId == personId);
+            return result.ToArray();
+        }
+        
+        
+        
         public void Clear()
         {
             todos = Array.Empty<Todo>();
