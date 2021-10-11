@@ -14,7 +14,7 @@ namespace TodoIt.Model
         {
             this.done = false;
             this.todoId = todoId;
-            this.description = description;
+            this.Description = description;
         }
 
         public Person Assignee => assignee; 

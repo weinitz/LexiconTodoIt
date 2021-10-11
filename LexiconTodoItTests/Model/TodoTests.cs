@@ -12,7 +12,6 @@ namespace LexiconTodoItTests
         public void TestCreate()
         {
             todo = new Todo(-1, "Something");
-
             Assert.Throws<ArgumentNullException>(() => new Todo(-1, ""));
             Assert.NotNull(todo);
             Assert.False(todo.Done);
