@@ -28,7 +28,7 @@ namespace LexiconTodoIt.Data
 
         public Person AddPerson(string firstName, string lastName)
         {
-            var personId = PersonSequencer.NextPersonId();
+            var personId = PersonSequencer.nextPersonId();
             var person = new Person(personId, firstName, lastName);
 
             Array.Resize(ref People.persons, People.persons.Length + 1);
