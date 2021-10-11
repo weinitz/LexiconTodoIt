@@ -19,7 +19,18 @@ namespace LexiconTodoItTests
             Assert.Equal(firstName, person.FirstName);
             Assert.Equal(lastName, person.LastName);
             Assert.Equal(1, people.Size());
-            
+        }
+
+        [Fact]
+        public void ClearTest()
+        {
+            var firstName = "Tim";
+            var lastName = "Weinitz";
+
+            var people = new People();
+            people.AddPerson(firstName, lastName);
+
+            Assert.Equal(1, people.Size());
             people.Clear();
             Assert.Equal(0, people.Size());
         }
