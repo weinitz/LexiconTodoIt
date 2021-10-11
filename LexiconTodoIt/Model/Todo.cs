@@ -16,8 +16,8 @@ namespace TodoIt.Model
             this.todoId = todoId;
             this.description = description;
         }
-        
-        
+
+        public Person Assignee => assignee; 
         public string Description
         {
             get => description;
