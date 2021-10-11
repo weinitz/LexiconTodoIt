@@ -16,7 +16,7 @@ namespace LexiconTodoIt.Model
         {
             this.todoId = todoId;
             this.description = description;
-        } 
+        }
 
     }
 }
