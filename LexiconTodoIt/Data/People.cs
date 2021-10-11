@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using TodoIt.Model;
 
 namespace LexiconTodoIt.Data
 {
-    class People
+    public class People
     {
         private static Person[] persons = new Person[0];
 
@@ -19,11 +20,8 @@ namespace LexiconTodoIt.Data
 
         public Person FindById(int personId)
         {
-            if (personId > Size())
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            return persons[personId];
+            var person = persons.First((e) => e.PersonId == personId);
+            return person;
         }
 
         public Person AddPerson(string firstName, string lastName)
@@ -33,7 +31,7 @@ namespace LexiconTodoIt.Data
 
             Array.Resize(ref People.persons, People.persons.Length + 1);
 
-            People.persons[People.persons.Length] = person;
+            People.persons[Size()-1] = person;
 
             return person;
         }
