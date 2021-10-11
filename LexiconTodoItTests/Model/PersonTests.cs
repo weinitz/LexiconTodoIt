@@ -2,7 +2,7 @@
 using TodoIt.Model;
 using Xunit;
 
-namespace TodoItTests
+namespace LexiconTodoItTests
 {
     public class PersonTests
     {
