@@ -8,7 +8,7 @@ namespace LexiconTodoIt.Data
         {
             return todoId++;
         }
-
+        
         public static void reset()
         {
             todoId = 0;
