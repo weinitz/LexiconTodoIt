@@ -23,13 +23,20 @@ namespace LexiconTodoIt.Data
             return todos.First((e) => e.TodoId == todoId );
         }
 
-        public Todo AddTodo(Todo todo)
+        public Todo AddTodo(String description)
         {
             var id = TodoSequencer.nextTodoId();
             Array.Resize(ref todos , Size()+1);
+            
             // TODO validate todo item?
+            var todo = new Todo(id, description);
             todos[Size() - 1] = todo;
             return todo;
+        }
+
+        public void Clear()
+        {
+            todos = Array.Empty<Todo>();
         }
     }
 }
