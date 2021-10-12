@@ -12,11 +12,11 @@ namespace LexiconTodoIt.Data
         /// <summary>
         ///     Array of persons
         /// </summary>
-        private static Person[] persons;
+        private static  Person[] persons;
 
         public People()
         {
-            Clear();
+            persons = new Person[0];
         }
 
         /// <summary>

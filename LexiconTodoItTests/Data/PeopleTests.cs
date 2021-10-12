@@ -1,4 +1,5 @@
-﻿using LexiconTodoIt.Data;
+﻿using System.Threading;
+using LexiconTodoIt.Data;
 using TodoIt.Model;
 using Xunit;
 
@@ -6,11 +7,13 @@ namespace LexiconTodoItTests
 {
     public class PeopleTests
     {
+        private readonly People people = new People();
         People SetupPeople()
         {
-            var people = new People();
             people.Clear();
             PersonSequencer.Reset();
+            // Wait for static  Person[] persons; to be cleared because it is static
+            Thread.Sleep(50);
             return people;
         }
 
@@ -26,8 +29,9 @@ namespace LexiconTodoItTests
             Assert.Equal(firstName, person.FirstName);
             Assert.Equal(lastName, person.LastName);
             Assert.Equal(1, people.Size());
+            people = null;
         }
-
+        
         [Fact]
         public void ClearTest()
         {
@@ -54,6 +58,7 @@ namespace LexiconTodoItTests
             var foundPerson = people.FindById(person.PersonId);
 
             Assert.Equal(person.PersonId, foundPerson.PersonId);
+            people = null;
         }
 
         [Fact]
@@ -72,6 +77,7 @@ namespace LexiconTodoItTests
 
             Assert.True(successfullyRemovedPerson);
             Assert.False(successfullyRemovedNotPresentPerson);
+            people = null;
         }
 
         [Fact]
@@ -92,6 +98,7 @@ namespace LexiconTodoItTests
             Assert.Equal(0, people.IndexOfPerson(persons[0]));
             Assert.Equal(1, people.IndexOfPerson(persons[2]));
             Assert.Equal(-1, people.IndexOfPerson(persons[1]));
+            people = null;
         }
     }
 }
