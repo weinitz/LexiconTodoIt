@@ -6,15 +6,21 @@ namespace LexiconTodoItTests
 {
     public class PeopleTests
     {
+        People SetupPeople()
+        {
+            var people = new People();
+            people.Clear();
+            PersonSequencer.Reset();
+            return people;
+        }
+
         [Fact]
         public void AddPersonTest()
         {
             var firstName = "Tim";
             var lastName = "Weinitz";
 
-            var people = new People();
-            PersonSequencer.Reset();
-            people.Clear();
+            var people = SetupPeople();
             var person = people.AddPerson(firstName, lastName);
 
             Assert.Equal(firstName, person.FirstName);
@@ -28,9 +34,7 @@ namespace LexiconTodoItTests
             var firstName = "Tim";
             var lastName = "Weinitz";
 
-            var people = new People();
-            PersonSequencer.Reset();
-            people.Clear();
+            var people = SetupPeople();
 
             people.AddPerson(firstName, lastName);
 
@@ -45,12 +49,8 @@ namespace LexiconTodoItTests
             var firstName = "Tim";
             var lastName = "Weinitz";
 
-            var people = new People();
-            PersonSequencer.Reset();
-            people.Clear();
-
+            var people = SetupPeople();
             var person = people.AddPerson(firstName, lastName);
-
             var foundPerson = people.FindById(person.PersonId);
 
             Assert.Equal(person.PersonId, foundPerson.PersonId);
@@ -62,13 +62,13 @@ namespace LexiconTodoItTests
             var firstName = "Tim";
             var lastName = "Weinitz";
 
-            var people = new People();
-            PersonSequencer.Reset();
-            var person = people.AddPerson(firstName, lastName);
-            var successfullyRemovedPerson = people.RemovePerson(person);
+            var people = SetupPeople();
 
-            person = new Person(12, firstName, lastName);
-            var successfullyRemovedNotPresentPerson = people.RemovePerson(person);
+            var person1 = people.AddPerson(firstName, lastName);
+            var successfullyRemovedPerson = people.RemovePerson(person1);
+
+            var person2 = new Person(12, firstName, lastName);
+            var successfullyRemovedNotPresentPerson = people.RemovePerson(person2);
 
             Assert.True(successfullyRemovedPerson);
             Assert.False(successfullyRemovedNotPresentPerson);
@@ -80,9 +80,7 @@ namespace LexiconTodoItTests
             const string firstName = "Tim";
             const string lastName = "Weinitz";
 
-            var people = new People();
-            PersonSequencer.Reset();
-            people.Clear();
+            var people = SetupPeople();
 
             var persons = new[]
             {

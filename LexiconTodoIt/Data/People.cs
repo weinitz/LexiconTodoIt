@@ -12,7 +12,12 @@ namespace LexiconTodoIt.Data
         /// <summary>
         ///     Array of persons
         /// </summary>
-        private static Person[] persons = new Person[0];
+        private static Person[] persons;
+
+        static People()
+        {
+            persons = new Person[0];
+        }
 
         /// <summary>
         ///     Number of items in persons
@@ -66,7 +71,7 @@ namespace LexiconTodoIt.Data
         /// </summary>
         public void Clear()
         {
-            persons = Array.Empty<Person>();
+            persons = new Person[0];
         }
 
         /// <summary>Removes the a person based on the index.</summary>
