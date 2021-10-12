@@ -68,6 +68,22 @@ namespace LexiconTodoItTests
         }
 
         [Fact]
+        public void FindAllTodosByAssigneeId()
+        {
+            Setup();
+            var michael = people.AddPerson("Michael", "Sjögren");
+            var tim = people.AddPerson("Tim", "Weinitz");
+            var todo1 = todoItems.AddTodo("Tim task!");
+            var todo2 = todoItems.AddTodo("Michael task!");
+            var todo3 = todoItems.AddTodo("Michael task 2!");
+
+            todo2.Assignee = michael;
+            todo3.Assignee = michael;
+            todo1.Assignee = tim;
+            Assert.Equal(2 , todoItems.FindByAssignee(michael.PersonId).Length);
+            Assert.Single(todoItems.FindByAssignee(tim.PersonId));
+        }
+        [Fact]
         public void FindAllTodosByCompleteness()
         {
             Setup();
@@ -79,10 +95,24 @@ namespace LexiconTodoItTests
             todo3.Done = true;
             Assert.Equal(2,todoItems.FindByDoneStatus(true).Length);
             Assert.Single(todoItems.FindByDoneStatus(false));
-
         }
-        
-        
+
+        [Fact]
+        public void FindAllUnAssignedTodos()
+        {
+            Setup();            
+            var michael = people.AddPerson("Michael", "Sjögren");
+            var tim = people.AddPerson("Tim", "Weinitz");
+            
+            var todo1 = todoItems.AddTodo("Tim task!");
+            var todo2 = todoItems.AddTodo("Michael task!");
+            var todo3 = todoItems.AddTodo("Michael task 2!");
+            var todo4 = todoItems.AddTodo("Tim task 2!");
+
+            todo1.Assignee = tim;
+            var unAssignedTodos = todoItems.FindUnassignedTodoItems();
+            Assert.Equal(3 ,unAssignedTodos.Length);
+        }
 
     }
 }
