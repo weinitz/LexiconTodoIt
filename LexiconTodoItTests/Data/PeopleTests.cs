@@ -1,7 +1,6 @@
-﻿using System.Runtime.InteropServices.ComTypes;
+﻿using System;
 using LexiconTodoIt.Data;
 using Xunit;
-using TodoIt.Model;
 
 namespace LexiconTodoItTests
 {
@@ -48,6 +47,42 @@ namespace LexiconTodoItTests
 
             Assert.Equal(firstName, person.FirstName);
             Assert.Equal(lastName, person.LastName);
+        }
+
+        [Fact]
+        public void RemovePersonTest()
+        {
+            var firstName = "Tim";
+            var lastName = "Weinitz";
+
+            var people = new People();
+            var person = people.AddPerson(firstName, lastName);
+
+            people.RemovePerson(person);
+
+            person = people.AddPerson(firstName, lastName);
+
+            Assert.Equal(1, people.Size());
+            Assert.Equal(2, person.PersonId);
+        }
+
+        [Fact]
+        public void IndexOfPersonTest()
+        {
+            const string firstName = "Tim";
+            const string lastName = "Weinitz";
+
+            var people = new People();
+            var persons = new[]
+                        {
+                            people.AddPerson(firstName, lastName),
+                            people.AddPerson(firstName, lastName),
+                            people.AddPerson(firstName, lastName)
+                        };
+            people.RemovePerson(persons[1]);
+            Assert.Equal(0, people.IndexOfPerson(persons[0]));
+            Assert.Equal(1, people.IndexOfPerson(persons[2]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => people.IndexOfPerson(persons[1]));
         }
     }
 }
