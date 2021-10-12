@@ -53,8 +53,7 @@ namespace LexiconTodoItTests
 
             var foundPerson = people.FindById(person.PersonId);
 
-            Assert.Equal(firstName, person.FirstName);
-            Assert.Equal(lastName, person.LastName);
+            Assert.Equal(person.PersonId, foundPerson.PersonId);
         }
 
         [Fact]
