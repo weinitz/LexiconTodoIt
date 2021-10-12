@@ -15,6 +15,8 @@ namespace LexiconTodoItTests
             todoItems = new TodoItems();
             todoItems.Clear();
             people.Clear();
+            TodoSequencer.reset();
+            PersonSequencer.Reset();
         }
         
         [Fact]
@@ -64,6 +66,23 @@ namespace LexiconTodoItTests
             Assert.Equal(2 , todoItems.FindByAssignee(michael).Length);
             Assert.Single(todoItems.FindByAssignee(tim));
         }
+
+        [Fact]
+        public void FindAllTodosByCompleteness()
+        {
+            Setup();
+            var todo1 = todoItems.AddTodo("Tim task!");
+            var todo2 = todoItems.AddTodo("Michael task!");
+            var todo3 = todoItems.AddTodo("Michael task 2!");
+            todo1.Done = true;
+            todo2.Done = false;
+            todo3.Done = true;
+            Assert.Equal(2,todoItems.FindByDoneStatus(true).Length);
+            Assert.Single(todoItems.FindByDoneStatus(false));
+
+        }
+        
+        
 
     }
 }
