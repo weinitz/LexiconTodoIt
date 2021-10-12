@@ -7,11 +7,14 @@ namespace LexiconTodoItTests
     public class TodoItemsTests
     {
         private TodoItems todoItems;
+        private People people;
 
         void Setup()
         {
+            people = new People();
             todoItems = new TodoItems();
             todoItems.Clear();
+            people.Clear();
         }
         
         [Fact]
@@ -43,6 +46,23 @@ namespace LexiconTodoItTests
             var success = todoItems.RemoveTodo(nonExistentTodo);
             Assert.False(success);
             Assert.Equal(1,todoItems.Size());
+        }
+
+        [Fact]
+        public void FindAllTodosByAssignee()
+        {
+            Setup();
+            var michael = people.AddPerson("Michael", "Sjögren");
+            var tim = people.AddPerson("Tim", "Weinitz");
+            var todo1 = todoItems.AddTodo("Tim task!");
+            var todo2 = todoItems.AddTodo("Michael task!");
+            var todo3 = todoItems.AddTodo("Michael task 2!");
+
+            todo2.Assignee = michael;
+            todo3.Assignee = michael;
+            todo1.Assignee = tim;
+            Assert.Equal(2 , todoItems.FindByAssignee(michael).Length);
+            Assert.Single(todoItems.FindByAssignee(tim));
         }
 
     }
