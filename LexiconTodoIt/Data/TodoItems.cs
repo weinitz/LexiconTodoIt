@@ -60,6 +60,8 @@ namespace LexiconTodoIt.Data
 
         public bool RemoveTodo(Todo todo)
         {
+            if (todo == null) return false;
+            
             for (int i = 0; i < Size(); i++)
             {
                 var t = todos[i];

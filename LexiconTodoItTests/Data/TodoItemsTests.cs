@@ -11,7 +11,9 @@ namespace LexiconTodoItTests
         void Setup()
         {
             todoItems = new TodoItems();
+            todoItems.Clear();
         }
+        
         [Fact]
         public void AddNewTodo()
         {
@@ -29,6 +31,18 @@ namespace LexiconTodoItTests
             var success = todoItems.RemoveTodo(todo);
             Assert.True(success);
             Assert.Equal(0,todoItems.Size());
+        }
+        
+        [Fact]
+        public void RemoveANonExistentTodoReturnsFalse()
+        {
+            Setup();
+            todoItems.AddTodo("Some Important Task");
+            // does not exist in todoItems array
+            var nonExistentTodo = new Todo(TodoSequencer.nextTodoId(), "Non existent todo");
+            var success = todoItems.RemoveTodo(nonExistentTodo);
+            Assert.False(success);
+            Assert.Equal(1,todoItems.Size());
         }
 
     }
