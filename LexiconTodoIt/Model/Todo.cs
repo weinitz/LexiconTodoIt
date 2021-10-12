@@ -17,7 +17,18 @@ namespace TodoIt.Model
             this.Description = description;
         }
 
-        public Person Assignee => assignee; 
+        public Person Assignee
+        {
+            get => assignee;
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentException("Assigned person was null");
+                }
+                assignee = value;
+            }
+        } 
         public string Description
         {
             get => description;
