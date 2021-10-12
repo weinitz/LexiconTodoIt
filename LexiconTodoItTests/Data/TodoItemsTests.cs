@@ -7,12 +7,10 @@ namespace LexiconTodoItTests
     public class TodoItemsTests
     {
         private TodoItems todoItems;
-        private People people;
 
         void Setup()
         {
             todoItems = new TodoItems();
-            people = new People();
         }
         [Fact]
         public void AddNewTodo()
@@ -21,6 +19,16 @@ namespace LexiconTodoItTests
             var todo = todoItems.AddTodo("Something");
             Assert.Single(todoItems.FindAll());
             Assert.Equal(todo , todoItems.FindAll()[0]);
+        }
+
+        [Fact]
+        public void RemoveAExistingTodoReturnsTrue()
+        {
+            Setup();
+            var todo = todoItems.AddTodo("Some Important Task");
+            var success = todoItems.RemoveTodo(todo);
+            Assert.True(success);
+            Assert.Equal(0,todoItems.Size());
         }
 
     }
