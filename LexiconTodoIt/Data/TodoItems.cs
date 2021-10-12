@@ -57,8 +57,22 @@ namespace LexiconTodoIt.Data
             var result = todos.Where(todo => todo.Assignee.PersonId == personId);
             return result.ToArray();
         }
-        
-        
+
+        public bool RemoveTodo(Todo todo)
+        {
+            if (todo == null) return false;
+            
+            for (int i = 0; i < Size(); i++)
+            {
+                var t = todos[i];
+                if (t.Equals(todo))
+                {
+                    todos = todos.Where((element, index) => index != i ).ToArray();
+                    return true;
+                }
+            }
+            return false;
+        }
         
         public void Clear()
         {
