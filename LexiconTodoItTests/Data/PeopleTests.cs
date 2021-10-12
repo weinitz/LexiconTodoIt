@@ -13,6 +13,8 @@ namespace LexiconTodoItTests
             var lastName = "Weinitz";
 
             var people = new People();
+            PersonSequencer.Reset();
+            people.Clear();
             var person = people.AddPerson(firstName, lastName);
 
             Assert.Equal(firstName, person.FirstName);
@@ -27,6 +29,9 @@ namespace LexiconTodoItTests
             var lastName = "Weinitz";
 
             var people = new People();
+            PersonSequencer.Reset();
+            people.Clear();
+
             people.AddPerson(firstName, lastName);
 
             Assert.Equal(1, people.Size());
@@ -41,6 +46,9 @@ namespace LexiconTodoItTests
             var lastName = "Weinitz";
 
             var people = new People();
+            PersonSequencer.Reset();
+            people.Clear();
+
             var person = people.AddPerson(firstName, lastName);
 
             var foundPerson = people.FindById(person.PersonId);
@@ -56,6 +64,9 @@ namespace LexiconTodoItTests
             var lastName = "Weinitz";
 
             var people = new People();
+            PersonSequencer.Reset();
+            people.Clear();
+
             var person = people.AddPerson(firstName, lastName);
 
             people.RemovePerson(person);
@@ -73,6 +84,9 @@ namespace LexiconTodoItTests
             const string lastName = "Weinitz";
 
             var people = new People();
+            PersonSequencer.Reset();
+            people.Clear();
+
             var persons = new[]
                         {
                             people.AddPerson(firstName, lastName),
