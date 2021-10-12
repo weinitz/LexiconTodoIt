@@ -24,9 +24,14 @@ namespace LexiconTodoItTests
         public void ResetTodoIdIsOne()
         {
             Setup();
+            TodoSequencer.reset();
+
             var actual = TodoSequencer.nextTodoId();
             Assert.Equal(1, actual);
             Assert.Equal(2, TodoSequencer.nextTodoId());
+            Assert.Equal(3, TodoSequencer.nextTodoId());
+            Assert.Equal(4, TodoSequencer.nextTodoId());
+
             TodoSequencer.reset();
             Assert.Equal(1, TodoSequencer.nextTodoId());
         }
