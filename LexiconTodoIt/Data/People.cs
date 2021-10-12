@@ -74,24 +74,24 @@ namespace LexiconTodoIt.Data
 
         /// <summary>Removes the a person based on the index.</summary>
         /// <param name="person">The person to remove.</param>
-        public void RemovePerson(Person person)
+        /// <returns>True if person is found and removed, or false if person is not found</returns>
+        public bool RemovePerson(Person person)
         {
             var personIndex = IndexOfPerson(person);
+            if (personIndex == -1)
+                return false;
             persons = persons.Where((x, index) => !index.Equals(personIndex)).ToArray();
+            return true;
         }
 
         /// <summary>
         /// Searches for person, and returns the zero-based index of the first occurrence in persons .
         /// </summary>
         /// <param name="person">The person to find PersonId for</param>
-        /// <returns>The zero-based index of the first occurrence of a person that matches the PersonId, if found.</returns>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="person" /> is not found</exception>
+        /// <returns>The zero-based index of the first occurrence of a person that matches the PersonId, if found, if found; otherwise, -1.</returns>
         public int IndexOfPerson(Person person)
         {
             var personIndex = Array.FindIndex(persons, x => x.PersonId.Equals(person.PersonId));
-            
-            if (personIndex == -1) throw new ArgumentOutOfRangeException();
-
             return personIndex;
         }
     }
