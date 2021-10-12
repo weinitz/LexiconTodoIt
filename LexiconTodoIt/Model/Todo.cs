@@ -9,7 +9,7 @@ namespace TodoIt.Model
         private bool done;
         private Person assignee;
         public int TodoId => todoId;
-        public bool Done { get; set; }
+        public bool Done { get => done; set => done = value ; }
         public Todo(int todoId, String description)
         {
             this.done = false;
