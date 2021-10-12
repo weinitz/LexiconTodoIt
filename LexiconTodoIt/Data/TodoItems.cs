@@ -36,7 +36,7 @@ namespace LexiconTodoIt.Data
 
         public Todo[] FindByDoneStatus(bool doneStatus)
         {
-            var result = todos.Where(todo => todo.Done);
+            var result = todos.Where(todo => todo.Done == doneStatus);
             return result.ToArray();
         }
 
