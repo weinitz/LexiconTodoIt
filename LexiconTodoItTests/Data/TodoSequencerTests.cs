@@ -21,7 +21,7 @@ namespace LexiconTodoItTests
         }
 
         [Fact]
-        public void ResetTodoIdIsZero()
+        public void ResetTodoIdIsOne()
         {
             Setup();
             var actual = TodoSequencer.nextTodoId();
