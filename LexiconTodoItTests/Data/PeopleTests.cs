@@ -1,5 +1,5 @@
-﻿using System;
-using LexiconTodoIt.Data;
+﻿using LexiconTodoIt.Data;
+using TodoIt.Model;
 using Xunit;
 
 namespace LexiconTodoItTests
@@ -64,16 +64,14 @@ namespace LexiconTodoItTests
 
             var people = new People();
             PersonSequencer.Reset();
-            people.Clear();
-
             var person = people.AddPerson(firstName, lastName);
+            var successfullyRemovedPerson = people.RemovePerson(person);
 
-            people.RemovePerson(person);
+            person = new Person(12, firstName, lastName);
+            var successfullyRemovedNotPresentPerson = people.RemovePerson(person);
 
-            person = people.AddPerson(firstName, lastName);
-
-            Assert.Equal(1, people.Size());
-            Assert.Equal(2, person.PersonId);
+            Assert.True(successfullyRemovedPerson);
+            Assert.False(successfullyRemovedNotPresentPerson);
         }
 
         [Fact]
@@ -87,15 +85,15 @@ namespace LexiconTodoItTests
             people.Clear();
 
             var persons = new[]
-                        {
-                            people.AddPerson(firstName, lastName),
-                            people.AddPerson(firstName, lastName),
-                            people.AddPerson(firstName, lastName)
-                        };
+            {
+                people.AddPerson(firstName, lastName),
+                people.AddPerson(firstName, lastName),
+                people.AddPerson(firstName, lastName)
+            };
             people.RemovePerson(persons[1]);
             Assert.Equal(0, people.IndexOfPerson(persons[0]));
             Assert.Equal(1, people.IndexOfPerson(persons[2]));
-            Assert.Throws<ArgumentOutOfRangeException>(() => people.IndexOfPerson(persons[1]));
+            Assert.Equal(-1, people.IndexOfPerson(persons[1]));
         }
     }
 }
