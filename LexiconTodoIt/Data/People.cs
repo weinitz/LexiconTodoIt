@@ -14,9 +14,9 @@ namespace LexiconTodoIt.Data
         /// </summary>
         private static Person[] persons;
 
-        static People()
+        public People()
         {
-            persons = new Person[0];
+            Clear();
         }
 
         /// <summary>
