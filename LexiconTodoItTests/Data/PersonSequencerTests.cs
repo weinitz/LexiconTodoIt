@@ -8,6 +8,7 @@ namespace LexiconTodoItTests
         [Fact]
         public void NextPersonIdTest()
         {
+            PersonSequencer.Reset();
             var expected = 1;
             var actual = PersonSequencer.nextPersonId();
 
