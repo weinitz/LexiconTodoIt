@@ -2,11 +2,12 @@ namespace LexiconTodoIt.Data
 {
     public class TodoSequencer
     {
-        private static int todoId;
+        private static int todoId = 0;
 
         public static int nextTodoId()
         {
-            return todoId++;
+            todoId += 1;
+            return todoId;
         }
         
         public static void reset()
